@@ -49,10 +49,19 @@ void readString(char* string){
     interrupt(0x10,0xe00+'\r',0,0,0);
 
 }
+
+void readSector(char *buffer, int sector){
+    interrupt(0x13, 0x201, buffer, div(sector, 36) * 0x100 + mod(sector, 18) + 1, mod(div(sector, 18), 2) * 0x100);
+}
+
 int mod(int angka1, int angka2){
     while(angka1>angka2){
         angka1 -=angka2;
     }
-    return anagka1;
+    return angka1;
+}
+
+int div(int a, int b){
+    return a/b;
 }
 
