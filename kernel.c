@@ -2,24 +2,131 @@ void printString(char *string);
 void readString(char *string);
 void readSector(char *buffer, int sector);
 void writeSector(char *buffer, int sector);
-// void readFile(char *buffer, char *filename, int *success);
-// void clear(char *buffer, int length); //Fungsi untuk mengisi buffer dengan 0
-void writeFile(char *buffer, char *filename, int *sectors);
-void executeProgram(char *filename, int segment, int *success);
-
 int mod(int angka1,int angka2);
 int div(int angak1, int angka2);
 int main () {
-  char* hu;
-  putInMemory(0xB000, 0x8000, 'H');
-  putInMemory(0xB000, 0x8001, 0xD);
-  putInMemory(0xB000, 0x8002, 'a');
-  putInMemory(0xB000, 0x8003, 0xD);
-  putInMemory(0xB000, 0x8004, 'i');
-  putInMemory(0xB000, 0x8005, 0xD);
+  //1
+  putInMemory(0xB000, 0x8000, ' ');
+  putInMemory(0xB000, 0x8001, 0xA);
+  putInMemory(0xB000, 0x8002, ',');
+  putInMemory(0xB000, 0x8003, 0xA);
+  putInMemory(0xB000, 0x8004, '-');
+  putInMemory(0xB000, 0x8005, 0xA);
+  putInMemory(0xB000, 0x8006, '-');
+  putInMemory(0xB000, 0x8007, 0xA);
+  putInMemory(0xB000, 0x8008, '.');
+  putInMemory(0xB000, 0x8009, 0xA);
+  putInMemory(0xB000, 0x8010, ' ');
+  putInMemory(0xB000, 0x8011, 0xA);
+  putInMemory(0xB000, 0x8012, ' ');
+  putInMemory(0xB000, 0x8013, 0xA);
+  putInMemory(0xB000, 0x8014, ' ');
+  putInMemory(0xB000, 0x8015, 0xA);
+  putInMemory(0xB000, 0x8016, ',');
+  putInMemory(0xB000, 0x8017, 0xA);
+  putInMemory(0xB000, 0x8018, '-');
+  putInMemory(0xB000, 0x8019, 0xA);
+  putInMemory(0xB000, 0x8020, '-');
+  putInMemory(0xB000, 0x8021, 0xA);
+  putInMemory(0xB000, 0x8022, '.');
+  putInMemory(0xB000, 0x8023, 0xA);
+
+  //2
+  putInMemory(0xB000, 0x8160, ' ');
+  putInMemory(0xB000, 0x8161, 0xA);
+  putInMemory(0xB000, 0x8162, '\\');
+  putInMemory(0xB000, 0x8163, 0xA);
+  putInMemory(0xB000, 0x8164, ' ');
+  putInMemory(0xB000, 0x8165, 0xA);
+  putInMemory(0xB000, 0x8166, ' ');
+  putInMemory(0xB000, 0x8167, 0xA);
+  putInMemory(0xB000, 0x8168, '/');
+  putInMemory(0xB000, 0x8169, 0xA);
+  putInMemory(0xB000, 0x8170, '~');
+  putInMemory(0xB000, 0x8171, 0xA);
+  putInMemory(0xB000, 0x8172, '-');
+  putInMemory(0xB000, 0x8173, 0xA);
+  putInMemory(0xB000, 0x8174, '\\');
+  putInMemory(0xB000, 0x8175, 0xA);
+  putInMemory(0xB000, 0x8176, ' ');
+  putInMemory(0xB000, 0x8177, 0xA);
+  putInMemory(0xB000, 0x8178, ' ');
+  putInMemory(0xB000, 0x8179, 0xA);
+  putInMemory(0xB000, 0x8180, '/');
+  putInMemory(0xB000, 0x8181, 0xA);
+
+  //3
+  putInMemory(0xB000, 0x8320, ' ');
+  putInMemory(0xB000, 0x8240, 0xA);
+  putInMemory(0xB000, 0x8240, ' ');
+  putInMemory(0xB000, 0x8240, 0xA);
+  putInMemory(0xB000, 0x8240, ')');
+  putInMemory(0xB000, 0x8240, 0xA);
+  putInMemory(0xB000, 0x8240, '\'');
+  putInMemory(0xB000, 0x8240, 0xA);
+  putInMemory(0xB000, 0x8240, ' ');
+  putInMemory(0xB000, 0x8240, 0xA);
+  putInMemory(0xB000, 0x8240, 'a');
+  putInMemory(0xB000, 0x8240, 0xA);
+  putInMemory(0xB000, 0x8240, ' ');
+  putInMemory(0xB000, 0x8240, 0xA);
+  putInMemory(0xB000, 0x8240, 'a');
+  putInMemory(0xB000, 0x8240, 0xA);
+  putInMemory(0xB000, 0x8240, '`');
+  putInMemory(0xB000, 0x8240, 0xA);
+  putInMemory(0xB000, 0x8240, '(');
+
+  //4
+  putInMemory(0xB000, 0x8480, ' ');
+  putInMemory(0xB000, 0x8481, 0xA);
+  putInMemory(0xB000, 0x8482, '(');
+  putInMemory(0xB000, 0x8483, 0xA);
+  putInMemory(0xB000, 0x8484, ' ');
+  putInMemory(0xB000, 0x8485, 0xA);
+  putInMemory(0xB000, 0x8486, ' ');
+  putInMemory(0xB000, 0x8487, 0xA);
+  putInMemory(0xB000, 0x8488, ',');
+  putInMemory(0xB000, 0x8489, 0xA);
+  putInMemory(0xB000, 0x8490, '-');
+  putInMemory(0xB000, 0x8491, 0xA);
+  putInMemory(0xB000, 0x8492, '-');
+  putInMemory(0xB000, 0x8493, 0xA);
+  putInMemory(0xB000, 0x8494, '-');
+  putInMemory(0xB000, 0x8495, 0xA);
+  putInMemory(0xB000, 0x8496, '.');
+  putInMemory(0xB000, 0x8497, 0xA);
+  putInMemory(0xB000, 0x8498, ' ');
+  putInMemory(0xB000, 0x8499, 0xA);
+  putInMemory(0xB000, 0x8500, ' ');
+  putInMemory(0xB000, 0x8501, 0xA);
+  putInMemory(0xB000, 0x8502, ')');
+  putInMemory(0xB000, 0x8503, 0xA);
+
+  //5
+  putInMemory(0xB000, 0x8640, ' ');
+  putInMemory(0xB000, 0x8641, 0xA);
+  putInMemory(0xB000, 0x8642, ' ');
+  putInMemory(0xB000, 0x8643, 0xA);
+  putInMemory(0xB000, 0x8644, '`');
+  putInMemory(0xB000, 0x8645, 0xA);
+  putInMemory(0xB000, 0x8646, '(');
+  putInMemory(0xB000, 0x8647, 0xA);
+  putInMemory(0xB000, 0x8648, '_');
+  putInMemory(0xB000, 0x8649, 0xA);
+  putInMemory(0xB000, 0x8650, 'o');
+  putInMemory(0xB000, 0x8651, 0xA);
+  putInMemory(0xB000, 0x8652, '_');
+  putInMemory(0xB000, 0x8653, 0xA);
+  putInMemory(0xB000, 0x8654, 'o');
+  putInMemory(0xB000, 0x8655, 0xA);
+  putInMemory(0xB000, 0x8656, '_');
+  putInMemory(0xB000, 0x8657, 0xA);
+  putInMemory(0xB000, 0x8658, ')');
+  putInMemory(0xB000, 0x8659, 0xA);
+  putInMemory(0xB000, 0x8660, '\'');
+  putInMemory(0xB000, 0x8661, 0xA);
+
   printString("1 2 3 4 5");
-  readString(hu);
-  printString(hu);
   while (1);
 }
 
@@ -62,76 +169,6 @@ void readSector(char *buffer, int sector){
 
 void writeSector(char *buffer, int sector){
     interrupt(0x13, 0x301, buffer, div(sector, 36) * 0x100 + mod(sector, 18) + 1, mod(div(sector, 18), 2) * 0x100);
-}
-
-void readFile(char *buffer, char *filename, int *success){
-    int dir[512];
-    int found=0;
-    int i = 0;
-    *success=1;
-
-    readSector(dir,2);
-    while (!found && i<16)
-    {
-        int j = 0;
-        while (j< 12 && filename[j]==dir[i*32+j])
-        {
-            j++;
-        }
-        if (dir[i*32+j]=='\0' && i<16)found=1;
-        i++;
-    }
-    if (i==16)
-    {
-        *success=0;
-    }
-    if (*success)
-    {
-        int k = 12;
-        while(k < 32)
-        {
-            buffer[k]=dir[i*32+k];
-            k++;
-        }
-        
-    }
-    
-}
-
-
-void executeProgram(char *filename, int segment, int *success){
-    char buff[20];
-    int succes;
-    int i=0;
-
-    *success=0;
-    readFile(buff, filename, &succes);
-    if (succes)
-    {
-        while (i<20)
-        {
-            putInMemory(segment,i,buff[i]);
-        }
-        launchProgram(segment);
-        *success=1;
-    }
-    
-}
-
-void writeFile(char *buffer, char *filename, int *sectors){
-    char buffMap[512], buffDir[512];
-    buffDir[0] = 0;
-    int i = 0, flag = 1;
-
-    while (flag){
-        readSector(buffDir[i], 2);
-        if (strlen(buffDir[i] == 0)){
-            
-        }
-    }
-    
-
-
 }
 
 int mod(int angka1, int angka2){
