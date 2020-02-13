@@ -4,17 +4,12 @@ void readSector(char *buffer, int sector);
 int mod(int angka1,int angka2);
 int div(int angak1, int angka2);
 int main () {
-  char* hu;
-  putInMemory(0xB000, 0x8000, 'H');
-  putInMemory(0xB000, 0x8001, 0xD);
-  putInMemory(0xB000, 0x8002, 'a');
-  putInMemory(0xB000, 0x8003, 0xD);
-  putInMemory(0xB000, 0x8004, 'i');
-  putInMemory(0xB000, 0x8005, 0xD);
-  printString("1 2 3 4 5");
-  readString(hu);
-  printString(hu);
-  while (1);
+    showOSLogo();
+
+    char* hu;
+    readString(hu);
+    printString(hu);
+    while (1);
 }
 
 void handleInterrupt21 (int AX, int BX, int CX, int DX) {}
@@ -54,32 +49,31 @@ void readString(char* string){
 
 void showOSLogo(){
 	int pos = 0x8000;
-	printToDisplay("             _____                                                      ", pos, 0xD); pos += 0xA0;
-	printToDisplay("            /     \\                                                     ", pos, 0xD); pos += 0xA0;
-	printToDisplay("            vvvvvvv  /|__/|                                             ", pos, 0xD); pos += 0xA0;
-	printToDisplay("               I   /O,O   |                                             ", pos, 0xD); pos += 0xA0;
-	printToDisplay("               I /_____   |      /|/|                                   ", pos, 0xD); pos += 0xA0;
-	printToDisplay("              J|/^ ^ ^ \\  |    /00  |    _//|                           ", pos, 0xD); pos += 0xA0;
-	printToDisplay("               |^ ^ ^ ^ |W|   |/^^\\ |   /oo |                           ", pos, 0xD); pos += 0xA0;
-	printToDisplay("                \\m___m__|_|    \\m_m_|   \\mm_|                           ", pos, 0xD); pos += 0xA0;
-	printToDisplay("                                                                        ", pos, 0xD); pos += 0xA0;
-	printToDisplay("                Irfan        Asif        Jofi                           ", pos, 0x4); pos += 0xA0;
-	printToDisplay("                13517078     13517099    13517135                       ", pos, 0x4); pos += 0xA0;
-	printToDisplay("                                                                        ", pos, 0xD); pos += 0xA0;
-	printToDisplay("            _        _             ___        ___                       ", pos, 0x2); pos += 0xA0;
-	printToDisplay("           | |      | |           |  _|      |_  |                      ", pos, 0x2); pos += 0xA0;
-	printToDisplay("           | |_ ___ | |_ ___  _ __| | ___  ___ | |                      ", pos, 0x2); pos += 0xA0;
-	printToDisplay("           | __/ _ \\| __/ _ \\| '__| |/ _ \\/ __|| |                      ", pos, 0x2); pos += 0xA0;
-	printToDisplay("           | || (_) | || (_) | |  | | (_) \\__ \\| |                      ", pos, 0x2); pos += 0xA0;
-	printToDisplay("            \\__\\___/ \\__\\___/|_|  | |\\___/|___/| |                      ", pos, 0x2); pos += 0xA0;
-	printToDisplay("                                  |___|      |___|                      ", pos, 0x2); pos += 0xA0;					
+	printToDisplay("                                                                         ", pos, 0xA); pos += 0xA0;
+	printToDisplay("                                                                         ", pos, 0xA); pos += 0xA0;
+	printToDisplay("                                                                         ", pos, 0xA); pos += 0xA0;
+	printToDisplay("                                                                         ", pos, 0xA); pos += 0xA0;
+	printToDisplay("                                                                         ", pos, 0xA); pos += 0xA0;
+	printToDisplay("                                                                         ", pos, 0xA); pos += 0xA0;
+	printToDisplay("                               ,--.   ,--.                                           ", pos, 0xA); pos += 0xA0;
+	printToDisplay("                               \\  /-~-\\  /                                              ", pos, 0xA); pos += 0xA0;
+	printToDisplay("                                )' a a `(                                              ", pos, 0xA); pos += 0xA0;
+	printToDisplay("                               (  ,---.  )                                           ", pos, 0xA); pos += 0xA0;
+	printToDisplay("                                `(_o_o_)'                                         ", pos, 0xA); pos += 0xA0;
+	printToDisplay("                                                                           ", pos, 0xA); pos += 0xA0;
+	printToDisplay("                              King of Kings                                        ", pos, 0xA); pos += 0xA0;
+	printToDisplay("                                                                         ", pos, 0xA); pos += 0xA0;
+	printToDisplay("                                                                         ", pos, 0xA); pos += 0xA0;
+	printToDisplay("                                                                         ", pos, 0xA); pos += 0xA0;
+	printToDisplay("                                                                         ", pos, 0xA); pos += 0xA0;
+	printToDisplay("                                                                         ", pos, 0xA); pos += 0xA0;				
 }
 
 void printToDisplay(char teks[100], int posisi, int warna){
 	int indeks = 0;
 	int lokasi = 0xB000;
 	while(teks[indeks] != '\0'){
-		putInMemory(lokasi, posisi, teks[i]);
+		putInMemory(lokasi, posisi, teks[indeks]);
 		posisi++;
 		putInMemory(lokasi, posisi, warna);
 		posisi++;
