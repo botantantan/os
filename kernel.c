@@ -4,7 +4,7 @@ void printString(char *string);
 void readString(char *string);
 void readSector(char *buffer, int sector);
 void writeSector(char *buffer, int sector);
-// void readFile(char *buffer, char *filename, int *success);
+void readFile(char *buffer, char *filename, int *success);
 // void clear(char *buffer, int length); //Fungsi untuk mengisi buffer dengan 0
 void writeFile(char *buffer, char *filename, int *sectors);
 void executeProgram(char *filename, int segment, int *success);
@@ -68,41 +68,6 @@ void readSector(char *buffer, int sector){
 void writeSector(char *buffer, int sector){
     interrupt(0x13, 0x301, buffer, div(sector, 36) * 0x100 + mod(sector, 18) + 1, mod(div(sector, 18), 2) * 0x100);
 }
-
-void readFile(char *buffer, char *filename, int *success){
-    int dir[512];
-    int found=0;
-    int i = 0;
-    *success=1;
-
-    readSector(dir,2);
-    while (!found && i<16)
-    {
-        int j = 0;
-        while (j< 12 && filename[j]==dir[i*32+j])
-        {
-            j++;
-        }
-        if (dir[i*32+j]=='\0' && i<16)found=1;
-        i++;
-    }
-    if (i==16)
-    {
-        *success=0;
-    }
-    if (*success)
-    {
-        int k = 12;
-        while(k < 32)
-        {
-            buffer[k]=dir[i*32+k];
-            k++;
-        }
-        
-    }
-    
-}
-
 
 void executeProgram(char *filename, int segment, int *success){
     char buff[20];
@@ -190,20 +155,63 @@ void clear(char *buffer, int length){
 void writeFile(char *buffer, char *filename, int *sectors){
     char dirfiles[512];
     char mapfiles[512];
+    char secbuff[512];
     int i = 0;
+    int j = 0;
+    int k = 0;
+    int l = 0;
+    int h = 0;
+    int cekSector = 0;
+    int tulisSector = 0;
     int found = 0;
 
     readSector(dirfiles,0x02);
     readSector(mapfiles,0x01);
-    while(i <16 && found == 0){
-        int j = 0;
-        while(j<12 && dirfiles[i*j]==0){
-            j++;
-        }
-        if (j==12){
+    while(found == 1&& i <16){
+        if(dirfiles[32*i]=='\0'){
             found = 1;
         }
+        i+=1;
     }
+    if(found == 0){
+        printString("Tidak ada ruang");
+        return;
+    }
+    while(h < 512 && cekSector < *sectors){
+        if(mapfiles[h] == 0x00){
+            cekSector+=1;
+        }
+        h+=1;
+
+    }
+    if(cekSector < *sectors){
+        return;
+    }else{
+        int sek = 0;
+        clear(32*i + dirfiles,32);
+        while(k < 12 && filename[k] == '\0'){
+            dirfiles[32*i+k] = filename[k];
+            k+=1;
+        }
+        while(l < 256 && tulisSector<*sectors){
+            if(mapfiles[l]=='\0'){
+                dirfiles[i*32 + 32 + tulisSector] = l;
+                clear(secbuff,512);
+                while(sek < 512){
+                    secbuff[sek] = buffer[i*512+sek];
+                    sek+=1;
+                }
+                writeSector(secbuff,l);
+                tulisSector+=1;
+                l+=1;
+            }
+            l+=1;
+        }
+        writeSector(dirfiles,2);
+        writeSector(mapfiles,1);
+
+    }
+
     
 }
 
