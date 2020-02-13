@@ -118,20 +118,47 @@ void executeProgram(char *filename, int segment, int *success){
     
 }
 
-void writeFile(char *buffer, char *filename, int *sectors){
-    char buffMap[512], buffDir[512];
-    buffDir[0] = 0;
-    int i = 0, flag = 1;
+void readFile(char *buffer, char *filename, int *success){
+    char dir[512];
+    int found=0;
+    int i = 0;
+    int length;
+    *success=1;
 
-    while (flag){
-        readSector(buffDir[i], 2);
-        if (strlen(buffDir[i] == 0)){
-            
+    readSector(dir,2);
+    length=0;
+    while (filename[length]!=0x0)
+    {
+        length++;
+    }
+    
+    while (found==0 && i<16)
+    {
+        int j = 0;
+        while (j< length && filename[j]==dir[i*32+j])
+        {
+            j++;
+            buffer[j]=filename[j];
+        }
+        if (j==length)found=1;
+        i++;
+    }
+    if (i>=16)
+    {
+        *success=0;
+    }
+    if (*success)
+    {
+        int j=12;
+        int k=0;
+        while (dir[i*32+j]!=0x0 && j<32)
+        {
+            readSector(buffer[k*512],dir[i*32+j]);
+            k++;
+            j++;
         }
     }
     
-
-
 }
 
 int mod(int angka1, int angka2){
