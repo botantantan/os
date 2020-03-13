@@ -142,3 +142,15 @@ void writeFile(char *buffer, char *path, int *sectors, char parentIndex) {
         *sectors = 0;
 
 }
+char cmpArray(char * arr1, char * arr2, int length) {
+    int idx = 0;
+    char same = 1;
+    while (idx < length && same){
+        if (arr1[idx] == arr2[idx]) same = 1;
+        else same = 0;
+        if (same && arr1[idx] == '\0')
+            idx = length;
+        idx++;
+    }
+    return same;
+}
