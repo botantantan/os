@@ -1,9 +1,9 @@
 //#define MAX_BYTE 256
 
-void changeCurDir(char *path, char *curdir, char parentIndex);
-void splitCommand(char *command, char commandList[16][16], int *num_command);
-void strCopy(char *str1, char *str2, int i);
-void relPathToAbsPath(char *dir, char *parentIndex, int *success);
+void cahnge_Current_Direct(char *path, char *curdir, char parentIndex);
+void split_command(char *command, char commandList[16][16], int *num_command);
+void copy_Str(char *str1, char *str2, int i);
+void changeRel_ToAbs(char *dir, char *parentIndex, int *success);
 void clear(char *buffer, int length);
 
 int main() {
@@ -37,7 +37,7 @@ int main() {
 		clear(path,512);
 
 		interrupt(0x21, 0x1, command, 1, 0);
-		splitCommand(command, commandList, &num_command);
+		split_command(command, commandList, &num_command);
 		
 		if(commandList[0][0] == 'c' && commandList[0][1] == 'd')
 		{
