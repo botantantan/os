@@ -1,9 +1,9 @@
 //#define MAX_BYTE 256
 
-void changeCurDir(char *path, char *curdir, char parentIndex);
-void splitCommand(char *command, char commandList[16][16], int *num_command);
-void strCopy(char *str1, char *str2, int i);
-void relPathToAbsPath(char *dir, char *parentIndex, int *success);
+void cahnge_Current_Direct(char *path, char *curdir, char parentIndex);
+void split_command(char *command, char commandList[16][16], int *num_command);
+void copy_Str(char *str1, char *str2, int i);
+void changeRel_ToAbs(char *dir, char *parentIndex, int *success);
 void clear(char *buffer, int length);
 
 int main() {
@@ -36,14 +36,14 @@ int main() {
 		clear(path,512);
 
 		interrupt(0x21, 0x1, command, 1, 0);
-		splitCommand(command, commandList, &num_command);
+		split_command(command, commandList, &num_command);
 		
 		if(commandList[0][0] == 'c' && commandList[0][1] == 'd') {
-			strCopy(commandList[1], path, 0);
+			copy_Str(commandList[1], path, 0);
 			parentIdx = curdir;
-			relPathToAbsPath(path, &parentIdx, &found);
+			changeRel_ToAbs(path, &parentIdx, &found);
 			if(found == 0) {
-				changeCurDir(path, &curdir, parentIdx);
+				cahnge_Current_Direct(path, &curdir, parentIdx);
 				result = 1;
 			}
 			else {
@@ -51,7 +51,7 @@ int main() {
 				result = 0;
 			}
 		}else if (commandList[0][0] == '.' && commandList[0][1] == '/') {
-			strCopy(commandList[0], path, 2);
+			copy_Str(commandList[0], path, 2);
 			argc = num_command;
 			for(i = 1; i < num_command; i++) {
 				j = i - 1;
@@ -111,7 +111,7 @@ int strCmp(char *str1, char *str2, int size) {
 	return eq;
 }
 
-void strCopy(char *str1, char *str2, int i) {
+void copy_Str(char *str1, char *str2, int i) {
 	int j = i;
 	int k;
 	while(str1[i] != '\0') {
@@ -121,7 +121,7 @@ void strCopy(char *str1, char *str2, int i) {
 	}
 }
 
-void splitCommand(char *command, char commandList[16][16], int *num_command) {
+void split_command(char *command, char commandList[16][16], int *num_command) {
 	int i;
 	int len;
 	int j;
@@ -145,7 +145,7 @@ void splitCommand(char *command, char commandList[16][16], int *num_command) {
 	*num_command = i+1;
 }
 		
-void changeCurDir(char *path, char *curdir, char parentIndex) {
+void cahnge_Current_Direct(char *path, char *curdir, char parentIndex) {
 	int i = 0;
 	int isEqual;
 	char dirs[512];
@@ -167,7 +167,7 @@ void changeCurDir(char *path, char *curdir, char parentIndex) {
 	}
 }
 
-void relPathToAbsPath(char *dir, char *parentIndex, int *success) {
+void changeRel_ToAbs(char *dir, char *parentIndex, int *success) {
    char dirs[512];
    char currpath[15];
    int i, j, k, isEqual, isLastPathDone, isDirnameDone;

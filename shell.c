@@ -21,10 +21,10 @@
 #define EMPTY 0x00
 #define USED 0xFF
 
-void changeCurDir(char *path, char *curdir, char parentIndex);
-void splitCommand(char *command, char commandList[16][16], int *num_command);
-void strCopy(char *str1, char *str2, int i);
-void relPathToAbsPath(char *dir, char *parentIndex, int *success);
+void ganti_Cur_Dir(char *path, char *curdir, char parentIndex);
+void split_command(char *command, char commandList[16][16], int *num_command);
+void Copy_Str(char *str1, char *str2, int i);
+void changPathToAbs(char *dir, char *parentIndex, int *success);
 void clear(char *buffer, int length);
 
 int main() {
@@ -57,15 +57,15 @@ int main() {
 		clear(path,512);
 
 		interrupt(0x21, 0x1, command, 1, 0);
-		splitCommand(command, commandList, &num_command);
+		split_command(command, commandList, &num_command);
 		
 		if(commandList[0][0] == 'c' && commandList[0][1] == 'd') {
-			strCopy(commandList[1], path, 0);
+			Copy_Str(commandList[1], path, 0);
 			parentIdx = curdir;
 			// mengecek apakah directory sudah benar dan path sekarang berisi nama directory terakhir yang jika ditemukan
-			relPathToAbsPath(path, &parentIdx, &found);
+			changPathToAbs(path, &parentIdx, &found);
 			if(found == 0) {
-				changeCurDir(path, &curdir, parentIdx);
+			 ganti_Cur_Dir(path, &curdir, parentIdx);
 				result = 1;
 			}
 			else {
@@ -73,7 +73,7 @@ int main() {
 				result = 0;
 			}
 		}else if (commandList[0][0] == '.' && commandList[0][1] == '/') {
-			strCopy(commandList[0], path, 2);
+			Copy_Str(commandList[0], path, 2);
 			argc = num_command;
 			for(i = 1; i < num_command; i++) {
 				j = i - 1;
@@ -135,7 +135,7 @@ int strCmp(char *str1, char *str2, int size) {
 }
 
 // Fungsi untuk copy string
-void strCopy(char *str1, char *str2, int i) {
+void Copy_Str(char *str1, char *str2, int i) {
 	int j = i;
 	int k;
 	while(str1[i] != '\0') {
@@ -146,7 +146,7 @@ void strCopy(char *str1, char *str2, int i) {
 }
 
 // Fungsi untuk memecah command menjadi beberapa command inputan user dan menghasilkan jumlah command
-void splitCommand(char *command, char commandList[16][16], int *num_command) {
+void split_command(char *command, char commandList[16][16], int *num_command) {
 	int i;
 	int len;
 	int j;
@@ -170,7 +170,7 @@ void splitCommand(char *command, char commandList[16][16], int *num_command) {
 	*num_command = i+1;
 }
 		
-void changeCurDir(char *path, char *curdir, char parentIndex) {
+void ganti_Cur_Dir(char *path, char *curdir, char parentIndex) {
 	//Traversal dirs untuk mencari folder currpath
 	int i = 0;   //Variabel untuk traversal sektor dirs
 	int isEqual;
@@ -194,7 +194,7 @@ void changeCurDir(char *path, char *curdir, char parentIndex) {
 }
 
 // Fungsi untuk mengecek path dari root apakah sudah benar atau belum dan menyimpan directory terakhir serta parent index dari directory akhir
-void relPathToAbsPath(char *dir, char *parentIndex, int *success) {
+void changPathToAbs(char *dir, char *parentIndex, int *success) {
    char dirs[SECTOR_SIZE];
    char currpath[MAX_FILENAME];
    int i, j, k, isEqual, isLastPathDone, isDirnameDone;
