@@ -1,9 +1,9 @@
 //#define MAX_BYTE 256
 
-void cahnge_Current_Direct(char *path, char *curdir, char parentIndex);
+void changeCurDir(char *path, char *curdir, char parentIndex);
 void split_command(char *command, char commandList[16][16], int *num_command);
-void copy_Str(char *str1, char *str2, int i);
-void changeRel_ToAbs(char *dir, char *parentIndex, int *success);
+void strCopy(char *str1, char *str2, int i);
+void relPathToAbsPath(char *dir, char *parentIndex, int *success);
 void clear(char *buffer, int length);
 
 int main() {
@@ -256,7 +256,8 @@ void relPathToAbsPath(char *dir, char *parentIndex, int *success)
 
 void clear(char *buffer, int length)
 {
-   for(int i = 0; i < length; ++i)
+	int i;
+   for(i = 0; i < length; ++i)
    {
       buffer[i] = 0x00;
    }
